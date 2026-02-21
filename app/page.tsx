@@ -3,6 +3,10 @@
 import { useRef, useState, useEffect } from "react";
 import { motion } from "framer-motion";
 
+// Contact constants
+const PHONE_NUMBER = "+919876543210";
+const WHATSAPP_NUMBER = "919876543210";
+
 export default function Home() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [prefersReducedMotion, setPrefersReducedMotion] = useState(false);
@@ -144,7 +148,7 @@ export default function Home() {
               <div className="flex items-center gap-4">
                 {/* WhatsApp Icon */}
                 <a
-                  href="https://wa.me/911111111111?text=Hi%20IRON%20PULSE%20FITNESS%2C%20I%20would%20like%20to%20know%20more%20about%20your%20memberships."
+                  href={`https://wa.me/${WHATSAPP_NUMBER}?text=Hi%20IRON%20PULSE%20FITNESS%2C%20I%20would%20like%20to%20know%20more%20about%20your%20memberships.`}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="hover:opacity-80 transition-opacity duration-200"
@@ -639,7 +643,7 @@ export default function Home() {
 
               {/* CTA Button */}
               <a
-                href="https://wa.me/911111111111?text=Hi%20IRON%20PULSE%20FITNESS%2C%20I%20would%20like%20to%20know%20more%20about%20the%20Basic%20membership%20plan."
+                href={`https://wa.me/${WHATSAPP_NUMBER}?text=Hi%20IRON%20PULSE%20FITNESS%2C%20I%20would%20like%20to%20know%20more%20about%20the%20Basic%20membership%20plan.`}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-center block w-full bg-gray-800 hover:bg-gray-700 text-white font-semibold uppercase py-3 sm:py-4 rounded transition-colors duration-200 transition-all duration-300 hover:scale-105"
@@ -699,7 +703,7 @@ export default function Home() {
 
               {/* CTA Button */}
               <a
-                href="https://wa.me/911111111111?text=Hi%20IRON%20PULSE%20FITNESS%2C%20I%20would%20like%20to%20know%20more%20about%20the%20Pro%20membership%20plan."
+                href={`https://wa.me/${WHATSAPP_NUMBER}?text=Hi%20IRON%20PULSE%20FITNESS%2C%20I%20would%20like%20to%20know%20more%20about%20the%20Pro%20membership%20plan.`}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-center block w-full bg-green-500 hover:bg-green-600 text-white font-semibold uppercase py-3 sm:py-4 rounded transition-colors duration-200 transition-all duration-300 hover:scale-105"
@@ -756,7 +760,7 @@ export default function Home() {
 
               {/* CTA Button */}
               <a
-                href="https://wa.me/911111111111?text=Hi%20IRON%20PULSE%20FITNESS%2C%20I%20would%20like%20to%20know%20more%20about%20the%20Elite%20membership%20plan."
+                href={`https://wa.me/${WHATSAPP_NUMBER}?text=Hi%20IRON%20PULSE%20FITNESS%2C%20I%20would%20like%20to%20know%20more%20about%20the%20Elite%20membership%20plan.`}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-center block w-full bg-gray-800 hover:bg-gray-700 text-white font-semibold uppercase py-3 sm:py-4 rounded transition-colors duration-200 transition-all duration-300 hover:scale-105"
@@ -816,8 +820,8 @@ export default function Home() {
                   <p className="text-gray-400 text-sm font-semibold uppercase tracking-wide mb-2">
                     Phone
                   </p>
-                  <a href="tel:+919876543210" className="text-green-500 hover:text-green-400 text-base sm:text-lg font-semibold transition-colors duration-200">
-                    +91 98765 43210
+                  <a href={`tel:${PHONE_NUMBER}`} className="text-green-500 hover:text-green-400 text-base sm:text-lg font-semibold transition-colors duration-200">
+                    {PHONE_NUMBER}
                   </a>
                 </div>
 
@@ -835,7 +839,7 @@ export default function Home() {
                 <div className="pt-4 flex gap-6">
                   {/* WhatsApp Button */}
                   <a
-                    href="https://wa.me/911111111111?text=Hi%20IRON%20PULSE%20FITNESS%2C%20I%20would%20like%20to%20know%20more%20about%20your%20memberships."
+                    href={`https://wa.me/${WHATSAPP_NUMBER}?text=Hi%20IRON%20PULSE%20FITNESS%2C%20I%20would%20like%20to%20know%20more%20about%20your%20memberships.`}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="p-3 rounded-lg hover:bg-neutral-800 hover:opacity-80 transition-all duration-200"
