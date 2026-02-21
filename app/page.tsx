@@ -1,11 +1,43 @@
 "use client";
 
-import { useRef, useState } from "react";
+import { useRef, useState, useEffect } from "react";
+import { motion } from "framer-motion";
 
 export default function Home() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [prefersReducedMotion, setPrefersReducedMotion] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
   const scrollContainerRef = useRef<HTMLDivElement>(null);
   const trainersScrollRef = useRef<HTMLDivElement>(null);
+
+  // Detect prefers-reduced-motion and screen size
+  useEffect(() => {
+    const mediaQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
+    setPrefersReducedMotion(mediaQuery.matches);
+
+    const handleMotionChange = (e: MediaQueryListEvent) => {
+      setPrefersReducedMotion(e.matches);
+    };
+
+    const handleResize = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+
+    handleResize();
+    mediaQuery.addEventListener("change", handleMotionChange);
+    window.addEventListener("resize", handleResize);
+
+    return () => {
+      mediaQuery.removeEventListener("change", handleMotionChange);
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
+
+  // Animation configuration based on motion preference and screen size
+  const animDistance = isMobile ? 20 : 40;
+  const animDuration = prefersReducedMotion ? 0 : isMobile ? 0.5 : 0.6;
+  const animOpacity = prefersReducedMotion ? 1 : 0;
+  const animTranslateY = prefersReducedMotion ? 0 : animDistance;
 
   const scroll = (direction: "left" | "right", ref?: React.RefObject<HTMLDivElement | null>) => {
     const container = ref?.current || scrollContainerRef.current;
@@ -210,15 +242,26 @@ export default function Home() {
             </p>
 
             {/* CTA Button */}
-            <button className="inline-block bg-green-500 hover:bg-green-600 text-white font-semibold uppercase px-8 sm:px-10 py-3 sm:py-4 rounded transition-colors duration-200 text-sm sm:text-base">
+            <motion.button 
+              className="inline-block bg-green-500 hover:bg-green-600 text-white font-semibold uppercase px-8 sm:px-10 py-3 sm:py-4 rounded transition-colors duration-200 text-sm sm:text-base"
+              whileHover={{ scale: 1.03 }}
+              transition={{ duration: 0.3 }}
+            >
               Get Started
-            </button>
+            </motion.button>
           </div>
         </div>
       </div>
 
       {/* Our Programs Section */}
-      <section id="programs" className="bg-black py-16 sm:py-20 md:py-24 px-4 sm:px-6 lg:px-8">
+      <motion.section
+        id="programs"
+        className="bg-black py-16 sm:py-20 md:py-24 px-4 sm:px-6 lg:px-8"
+        initial={{ opacity: animOpacity, translateY: animTranslateY }}
+        whileInView={{ opacity: 1, translateY: 0 }}
+        transition={{ duration: animDuration }}
+        viewport={{ once: true }}
+      >
         <div className="max-w-7xl mx-auto">
           {/* Section Title */}
           <div className="text-center mb-12 sm:mb-16">
@@ -327,10 +370,17 @@ export default function Home() {
             </div>
           </div>
         </div>
-      </section>
+      </motion.section>
 
       {/* Our Achievements Section */}
-      <section id="achievements" className="bg-neutral-900 py-16 sm:py-20 md:py-24 px-4 sm:px-6 lg:px-8">
+      <motion.section
+        id="achievements"
+        className="bg-neutral-900 py-16 sm:py-20 md:py-24 px-4 sm:px-6 lg:px-8"
+        initial={{ opacity: animOpacity, translateY: animTranslateY }}
+        whileInView={{ opacity: 1, translateY: 0 }}
+        transition={{ duration: animDuration }}
+        viewport={{ once: true }}
+      >
         <div className="max-w-7xl mx-auto">
           {/* Section Title */}
           <div className="text-center mb-12 sm:mb-16">
@@ -385,10 +435,17 @@ export default function Home() {
             </div>
           </div>
         </div>
-      </section>
+      </motion.section>
 
       {/* Meet Our Trainers Section */}
-      <section id="trainers" className="bg-black py-16 sm:py-20 md:py-24 px-4 sm:px-6 lg:px-8">
+      <motion.section
+        id="trainers"
+        className="bg-black py-16 sm:py-20 md:py-24 px-4 sm:px-6 lg:px-8"
+        initial={{ opacity: animOpacity, translateY: animTranslateY }}
+        whileInView={{ opacity: 1, translateY: 0 }}
+        transition={{ duration: animDuration }}
+        viewport={{ once: true }}
+      >
         <div className="max-w-7xl mx-auto">
           {/* Section Title */}
           <div className="text-center mb-12 sm:mb-16">
@@ -516,10 +573,17 @@ export default function Home() {
             </div>
           </div>
         </div>
-      </section>
+      </motion.section>
 
       {/* Membership Plans Section */}
-      <section id="plans" className="bg-neutral-900 py-16 sm:py-20 md:py-24 px-4 sm:px-6 lg:px-8">
+      <motion.section
+        id="plans"
+        className="bg-neutral-900 py-16 sm:py-20 md:py-24 px-4 sm:px-6 lg:px-8"
+        initial={{ opacity: animOpacity, translateY: animTranslateY }}
+        whileInView={{ opacity: 1, translateY: 0 }}
+        transition={{ duration: animDuration }}
+        viewport={{ once: true }}
+      >
         <div className="max-w-7xl mx-auto">
           {/* Section Title */}
           <div className="text-center mb-12 sm:mb-16">
@@ -578,7 +642,7 @@ export default function Home() {
                 href="https://wa.me/911111111111?text=Hi%20IRON%20PULSE%20FITNESS%2C%20I%20would%20like%20to%20know%20more%20about%20the%20Basic%20membership%20plan."
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-center block w-full bg-gray-800 hover:bg-gray-700 text-white font-semibold uppercase py-3 sm:py-4 rounded transition-colors duration-200"
+                className="text-center block w-full bg-gray-800 hover:bg-gray-700 text-white font-semibold uppercase py-3 sm:py-4 rounded transition-colors duration-200 transition-all duration-300 hover:scale-105"
               >
                 Join Now
               </a>
@@ -638,7 +702,7 @@ export default function Home() {
                 href="https://wa.me/911111111111?text=Hi%20IRON%20PULSE%20FITNESS%2C%20I%20would%20like%20to%20know%20more%20about%20the%20Pro%20membership%20plan."
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-center block w-full bg-green-500 hover:bg-green-600 text-white font-semibold uppercase py-3 sm:py-4 rounded transition-colors duration-200"
+                className="text-center block w-full bg-green-500 hover:bg-green-600 text-white font-semibold uppercase py-3 sm:py-4 rounded transition-colors duration-200 transition-all duration-300 hover:scale-105"
               >
                 Join Now
               </a>
@@ -695,17 +759,24 @@ export default function Home() {
                 href="https://wa.me/911111111111?text=Hi%20IRON%20PULSE%20FITNESS%2C%20I%20would%20like%20to%20know%20more%20about%20the%20Elite%20membership%20plan."
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-center block w-full bg-gray-800 hover:bg-gray-700 text-white font-semibold uppercase py-3 sm:py-4 rounded transition-colors duration-200"
+                className="text-center block w-full bg-gray-800 hover:bg-gray-700 text-white font-semibold uppercase py-3 sm:py-4 rounded transition-colors duration-200 transition-all duration-300 hover:scale-105"
               >
                 Join Now
               </a>
             </div>
           </div>
         </div>
-      </section>
+      </motion.section>
 
       {/* Contact Us Section */}
-      <section id="contact" className="bg-black py-16 sm:py-20 md:py-24 px-4 sm:px-6 lg:px-8">
+      <motion.section
+        id="contact"
+        className="bg-black py-16 sm:py-20 md:py-24 px-4 sm:px-6 lg:px-8"
+        initial={{ opacity: animOpacity, translateY: animTranslateY }}
+        whileInView={{ opacity: 1, translateY: 0 }}
+        transition={{ duration: animDuration }}
+        viewport={{ once: true }}
+      >
         <div className="max-w-7xl mx-auto">
           {/* Section Title */}
           <div className="text-center mb-12 sm:mb-16">
@@ -810,7 +881,7 @@ export default function Home() {
             </div>
           </div>
         </div>
-      </section>
+      </motion.section>
     </div>
   );
 }
